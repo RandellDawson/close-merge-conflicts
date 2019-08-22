@@ -6,7 +6,7 @@ const {
 } = require('./utils');
 
 const customComment = dedent`
-  This is the closing comment.
+  We are restructuring a lot of the code and learning resources referenced in your pull request, so for now I am going to go ahead and close this pull request. Thanks again for opening this pull request and for contributing to the community.
 `;
 
 const log = new ProcessingLog('close-guide-prs-with-merge-conflicts');
