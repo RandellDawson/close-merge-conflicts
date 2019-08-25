@@ -10,6 +10,8 @@ const closePR = async (number) => {
     );
   }
   catch (err) {
+    console.log(number);
+    console.log('failed');
     return { status: 'failed', error: err };
   }
   return result

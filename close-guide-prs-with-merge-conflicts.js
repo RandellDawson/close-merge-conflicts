@@ -12,7 +12,7 @@ const customComment = dedent`
 const log = new ProcessingLog('close-guide-prs-with-merge-conflicts');
 
 const mode = process.env.PRODUCTION_RUN === 'true'
-  ? 'Production ' 
+  ? 'Production' 
   : 'Test';
 
 console.log(`script started in ${mode} mode...`);
@@ -53,14 +53,17 @@ log.start();
         const closeResult = await closePR(number);
         if (closeResult.status === 'success') {
           closed = true;
+          data = { ...data, closed }
           const addCommentResult = await addComment(number, customComment);
           if (addCommentResult) {
             commentAdded = true;
           }
+        } else {
+          data = { ...data, closed, error: closeResult.error }
         }
         await rateLimiter();
       }
-      data = { ...data, closed, commentAdded };
+      data = { ...data, commentAdded };
       log.add(number, data);
     }
   })
